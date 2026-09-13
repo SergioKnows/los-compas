@@ -5,10 +5,10 @@ export const business = {
   address:'María Auxiliadora',landmark:'A 5 minutos del CC Mayorca',
   deliveryFee:null as number|null,bankName:'',bankAccount:'',bankHolder:'',paymentQr:'',
 };
-const ingredients=['Pan suave con ajonjolí de 20 cm','Salchicha','Ensalada de la casa','Cebolla picada en cuadritos','Ripio de papas','Salsas'];
+const ingredients=['Pan de ajonjolí de 20 cm','Salchicha','Ensalada de la casa','Cebolla','Ripio de papas','Salsas'];
 export const products:Product[]=[
- {id:'sencillo',name:'Sencillo',description:'El de siempre, bien hecho. Un encuentro de sabores con el contraste perfecto entre suave y crocante.',price:13000,ingredients:[...ingredients,'Cubierta de queso costeño rallado'],sauces:['Roja','Mayonesa','Mostaza'],tone:'yellow'},
- {id:'plancha',name:'Perro a la plancha',description:'El calor une todos los sabores. Compacto y cómodo de comer, para disfrutar cada mordisco.',price:14000,ingredients:[...ingredients,'Queso costeño rallado integrado a la preparación'],sauces:['Roja','Ajo','Rosada','Mostaza'],tone:'green'},
+ {id:'sencillo',name:'Sencillo',description:'El de siempre, bien hecho. Un encuentro de sabores con el contraste perfecto entre suave y crocante.',price:13000,ingredients:[...ingredients,'Queso costeño rallado'],sauces:['Roja','Mayonesa','Mostaza'],tone:'yellow'},
+ {id:'plancha',name:'Perro a la plancha',description:'El calor une todos los sabores. Compacto y cómodo de comer, para disfrutar cada mordisco.',price:14000,ingredients:[...ingredients,'Queso costeño integrado'],sauces:['Roja','Ajo','Rosada','Mostaza'],tone:'green'},
 ];
 export const money=(n:number)=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(n);
 export const productById=(id:string)=>products.find(p=>p.id===id);
