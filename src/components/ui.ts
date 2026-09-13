@@ -16,7 +16,7 @@ export const button=(variant:keyof typeof variants,extra='')=>`${buttonBase} ${v
 export const overlay='fixed inset-0 z-[60] bg-[#19251e55] backdrop-blur-[3px] motion-safe:animate-fade';
 export const dialog='fixed left-1/2 top-1/2 z-[70] max-h-[calc(100dvh-40px)] w-[min(520px,calc(100%-32px))] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg bg-white p-8 shadow-[0_24px_80px_#0002] motion-safe:animate-fade max-md:p-[25px]';
 // No reutiliza iconButton: su "relative" le gana en cascada a "absolute" y el botón deja de anclarse a la esquina.
-export const dialogClose='absolute right-4 top-4 z-10 inline-flex size-9 items-center justify-center rounded-full border border-line bg-white';
+export const dialogClose='absolute right-3 top-3 z-10 inline-flex size-9 items-center justify-center rounded-full border border-line bg-white shadow-[0_2px_8px_#0002]';
 export const dialogTitle='mt-6 mb-[13px] max-w-[90%] text-[29px] font-bold leading-[1.1] max-md:text-[27px]';
 export const dialogText='text-sm leading-[1.7] text-muted max-md:text-[13px]';
 export const productNumber='inline-grid size-[38px] shrink-0 place-items-center rounded-full border border-carbon/15 text-sm font-bold';
