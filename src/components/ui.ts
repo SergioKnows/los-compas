@@ -3,7 +3,6 @@ export const wrap='mx-auto w-full max-w-[1208px] px-6 max-md:px-[18px]';
 export const eyebrow="flex items-center gap-[9px] text-xs font-bold uppercase text-hoja before:size-[7px] before:rounded-full before:bg-current before:content-['']";
 export const iconButton='relative inline-flex items-center justify-center rounded-full border border-line bg-white';
 export const textButton='inline-flex items-center justify-start gap-2 py-2.5 text-[13px] font-bold hover:text-tomate-700';
-export const chipButton='mt-1 inline-flex items-center gap-2 rounded-full border border-line bg-soft px-4 py-2 text-[13px] font-bold text-carbon transition-colors duration-200 hover:border-hoja hover:bg-hoja-100 hover:text-hoja-700';
 // Tailwind v4 anima translate/scale/rotate como propiedades CSS propias (no "transform"),
 // así que transition-property debe listarlas por su nombre real o el movimiento no transiciona.
 const buttonBase='inline-flex min-h-[50px] items-center justify-center gap-3 rounded-md px-[22px] py-[13px] text-sm font-bold transition-[background-color,translate] duration-200 motion-safe:hover:-translate-y-0.5';

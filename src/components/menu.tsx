@@ -1,12 +1,12 @@
 'use client';
 import {useState} from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import {Plus,X,ArrowUpRight,Flame,Utensils} from 'lucide-react';
+import {Plus,X,Flame,Utensils} from 'lucide-react';
 import {products,money,type Product} from '@/lib/catalog';
 import {productImages} from '@/lib/product-images';
 import {useCart} from './cart-provider';
 import {ProductGallery} from './product-gallery';
-import {wrap,eyebrow,chipButton,button,overlay,dialog,dialogClose,dialogTitle,dialogText,productNumber,tone} from './ui';
+import {wrap,eyebrow,button,overlay,dialog,dialogClose,dialogTitle,dialogText,productNumber,tone} from './ui';
 // Resalta el tamaño del pan dentro de un ingrediente, ej. "Pan de ajonjolí de 20 cm".
 function emphasize(text:string){return text.split(/(20 cm)/).map((part,i)=>part==='20 cm'?<strong key={i} className="font-bold text-carbon">{part}</strong>:part);}
 function IngredientList({ingredients}:{ingredients:string[]}){const last=ingredients.length-1;return <p className="text-[13px] leading-[1.85] text-[#66665f]">{ingredients.map((ing,i)=><span key={ing}>{i>0&&(i===last?' y ':', ')}{emphasize(ing)}</span>)}</p>;}
@@ -15,14 +15,13 @@ function ProductCard({product,index}:{product:Product;index:number}){
  const choose=(s:string)=>setSauces(old=>old.includes(s)?old.filter(x=>x!==s):[...old,s]);
  const t=tone[product.tone];
  return <article className="flex flex-col overflow-hidden rounded-lg border border-line transition-[box-shadow,translate,scale] duration-300 ease-out motion-safe:hover:-translate-y-[3px] motion-safe:hover:scale-[1.015] hover:shadow-[0_12px_32px_#25252508]">
-  <ProductGallery images={productImages[product.id]??[]} name={product.name} priority={index===0}/>
+  <ProductGallery images={productImages[product.id]??[]} name={product.name} priority={index===0} onOpen={()=>setOpen(true)}/>
   <div className={`flex h-[76px] items-center justify-between px-7 max-md:h-[66px] max-md:px-[22px] ${t.strip}`}><span className={productNumber}>0{index+1}</span><span className="flex items-center gap-2 text-[11px] font-bold uppercase">{index===0?<Utensils size={17}/>:<Flame size={17}/>} {index===0?'El tradicional':'El de la plancha'}</span></div>
   <div className="flex-1 cursor-pointer px-7 pt-7 pb-[18px] max-md:px-[22px] max-md:pt-[23px] max-md:pb-[15px]" onClick={()=>setOpen(true)}>
    <h3 className="text-[29px] font-[750] leading-[1.1] max-md:text-[27px]">{product.name}</h3>
    <p className="mt-[13px] min-h-12 text-sm leading-[1.7] text-muted max-md:min-h-0">{product.description}</p>
-   <div className="mt-6 mb-2.5 max-md:mt-[19px]"><h4 className="mb-2 text-xs font-bold">¿Qué lleva?</h4><IngredientList ingredients={product.ingredients}/></div>
+   <div className="mt-6 max-md:mt-[19px]"><h4 className="mb-2 text-xs font-bold">¿Qué lleva?</h4><IngredientList ingredients={product.ingredients}/></div>
    <Dialog.Root open={open} onOpenChange={setOpen}>
-    <Dialog.Trigger className={chipButton}>Ingredientes y salsas <ArrowUpRight size={16}/></Dialog.Trigger>
     <Dialog.Portal><Dialog.Overlay className={overlay}/><Dialog.Content className={dialog}>
      <div className="-mx-8 -mt-8 mb-6 overflow-hidden rounded-t-lg max-md:-mx-[25px] max-md:-mt-[25px]"><ProductGallery images={productImages[product.id]??[]} name={product.name}/></div>
      <Dialog.Close aria-label="Cerrar detalles" className={dialogClose}><X size={20}/></Dialog.Close>
