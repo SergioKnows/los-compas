@@ -44,4 +44,4 @@ Tailwind CSS 4 con utilidades en los componentes. `src/app/globals.css` solo def
 
 Solo las selecciones del carrito se guardan en localStorage. Los datos personales del formulario permanecen en memoria y se incorporan al enlace de WhatsApp cuando el cliente decide continuar. No hay servidor de pedidos, cobro electrónico, analítica ni cuentas de usuario.
 
-Proyecto Next.js estándar, preparado para un alojamiento compatible con Node/Next.js. `metadataBase`, `openGraph` y `twitter` están comentados en `layout.tsx` porque necesitan una URL absoluta real para que las vistas previas de WhatsApp/redes carguen la imagen. Cuando haya un dominio, descomentarlos y definir `NEXT_PUBLIC_SITE_URL` con ese dominio. No se ha publicado un dominio ni se ha enviado ningún pedido real.
+Desplegado en Vercel: https://los-compas.vercel.app. `NEXT_PUBLIC_SITE_URL` debe definirse en las variables de entorno de Vercel con ese mismo origen (o el dominio propio, si se agrega uno más adelante) para que las vistas previas de WhatsApp/redes carguen la imagen. No se ha enviado ningún pedido real.
