@@ -44,7 +44,6 @@ function ProductCard({product,index}:{product:Product;index:number}){
  </article>;
 }
 export function Menu(){return <section id="menu" className={`${wrap} py-[72px] max-md:py-[42px]`}>
- <div className="mb-8 flex items-end justify-between gap-5 max-md:flex-col max-md:items-start max-md:gap-3.5"><div><div className={eyebrow}>El menú de los compas</div><h2 className="mt-3 text-[38px] font-[750] leading-[1.12] max-md:text-[30px]">Dos formas de<br className="hidden max-md:block"/> armar el parche.</h2></div><p className="text-sm text-muted">Elige tu perro. Nosotros ponemos el cariño.</p></div>
+ <div className="mb-8"><div className={eyebrow}>El menú de los compas</div><h2 className="mt-3 text-[38px] font-[750] leading-[1.12] max-md:text-[30px]">Dos formas de<br className="hidden max-md:block"/> armar el parche.</h2></div>
  <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">{products.map((p,i)=><ProductCard key={p.id} product={p} index={i}/>)}</div>
- <p className="mt-[22px] text-center text-xs text-muted max-md:text-left max-md:text-[11px] max-md:leading-relaxed">Nos estrenamos el 2 de octubre. Confirma disponibilidad y domicilio antes de cerrar tu pedido.</p>
 </section>;}

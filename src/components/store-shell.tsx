@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import * as Dialog from '@radix-ui/react-dialog';
-import { ShoppingBag, X, Plus, Minus, Trash2, ArrowRight, ArrowUpRight, MapPin, MessageCircle, Check, Bike } from 'lucide-react';
+import { ShoppingBag, X, Plus, Minus, Trash2, ArrowRight, ArrowUpRight, MessageCircle, Check } from 'lucide-react';
 import { useCart } from './cart-provider';
 import { business, productById, subtotal, money, whatsappUrl } from '@/lib/catalog';
 import { productImages } from '@/lib/product-images';
@@ -28,7 +28,6 @@ export function CartLines() {
 export function Header() {
     const cart = useCart(), pathname = usePathname(); return <>
         <a className="fixed -top-[100px] left-4 z-[100] bg-mostaza p-4 focus:top-4" href="#contenido">Saltar al contenido</a>
-        <div className="flex items-center justify-center gap-[7px] bg-hoja px-4 py-2.5 text-center text-xs text-white"><MapPin size={13} /><span>{business.address} · {business.landmark}</span></div>
         <header className="sticky top-0 z-30 h-[84px] border-b border-line bg-white/[.93] backdrop-blur-lg max-md:h-[72px]"><div className={`${wrap} flex h-full items-center justify-between gap-6`}>
             <Link href="/" aria-label="Los Compas, inicio"><img className="block w-[106px] max-md:w-[85px]" src="/brand/logo-compacto.svg" alt="Los Compas" width="106" height="64" /></Link>
             <nav className="flex items-center gap-8 text-sm font-semibold max-md:gap-4" aria-label="Navegación principal">
@@ -49,13 +48,12 @@ export function Header() {
 const footerLink = 'mb-2 block text-[13px] leading-[1.8] text-muted';
 export function Footer() {
     return <>
-        <footer className="border-t border-line bg-soft pt-[45px] pb-[100px] max-md:pt-8 max-md:pb-24">
-            <div className={`${wrap} grid grid-cols-[1.2fr_.8fr_1fr] gap-[50px] max-md:grid-cols-2 max-md:gap-x-[22px] max-md:gap-y-8`}>
-                <div><img className="mb-[18px] block w-[100px]" src="/brand/logo-compacto.svg" alt="Los Compas" width="120" height="75" /><p className="text-[13px] leading-[1.8] text-muted">Buenos perros.<br />Buena compañía.</p></div>
-                <div><h3 className="mb-[18px] text-[13px] font-bold">El parche</h3><Link className={footerLink} href="/#menu">Nuestro menú</Link><Link className={footerLink} href="/#domicilios">Domicilios</Link><Link className={footerLink} href="/pagar">Tu pedido y pagos</Link></div>
-                <div className="max-md:col-span-full"><h3 className="mb-[18px] text-[13px] font-bold">Por aquí estamos</h3><p className="text-[13px] leading-[1.8] text-muted">{business.address}<br />{business.landmark}</p><span className="mt-3 flex items-center gap-2 text-xs text-hoja"><Bike size={16} /> Por ahora, solo domicilios</span></div>
+        <footer className="border-t border-line bg-soft pt-10 pb-[84px] max-md:pt-8 max-md:pb-[88px]">
+            <div className={`${wrap} flex items-start justify-between gap-x-10 max-md:flex-wrap max-md:gap-y-8`}>
+                <div><img className="mb-[18px] block w-[100px]" src="/brand/logo-compacto.svg" alt="Los Compas" width="120" height="75" /><p className="text-[13px] leading-[1.8] text-muted">El parche del buen perro.</p></div>
+                <div><Link className={footerLink} href="/#menu">Nuestro menú</Link><Link className={footerLink} href="/#domicilios">Domicilios</Link><Link className={footerLink} href="/pagar">Tu pedido y pagos</Link></div>
             </div>
-            <div className={`${wrap} mt-[35px] flex justify-between border-t border-line pt-7 text-[11px] text-muted max-md:mt-[27px]`}><span>© {new Date().getFullYear()} Los Compas</span><span>Hecho para compartir.</span></div>
+            <p className={`${wrap} mt-6 border-t border-line pt-4 text-center text-[11px] text-muted`}>© {new Date().getFullYear()} Los Compas</p>
         </footer>
         <WhatsAppLink className="fixed right-[26px] bottom-[max(22px,env(safe-area-inset-bottom))] z-[35] flex min-h-[54px] items-center justify-center gap-2.5 rounded-[50px] bg-whatsapp px-[18px] py-[15px] text-white shadow-[0_5px_22px_#183a3526] transition-[background-color,translate] duration-200 hover:bg-whatsapp-700 motion-safe:hover:-translate-y-[3px] max-md:right-[18px] max-md:bottom-[max(18px,env(safe-area-inset-bottom))] max-md:size-[55px] max-md:p-0 max-md:[&>svg]:size-[26px]"><span className="flex items-center gap-2 text-xs font-bold max-md:hidden">Hablemos, compa <ArrowUpRight size={15} /></span></WhatsAppLink>
     </>;
