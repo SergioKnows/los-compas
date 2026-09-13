@@ -34,7 +34,11 @@ La fecha marca el día de apertura en Colombia; no se anuncia una hora de atenci
 
 ## Assets
 
-`public/brand` contiene copias de los SVG originales de `C:/Users/ReconVZ/Documents/los-compas-identidad`. No se redibujaron personajes. No hay fotografías inventadas de los productos.
+`public/brand` contiene copias de los SVG originales de `C:/Users/ReconVZ/Documents/los-compas-identidad`. No se redibujaron personajes. Las fotos de los productos viven en `src/assets/productos` y se mapean por id en `src/lib/product-images.ts` (el perro a la plancha tiene dos: entero y cortado, mostradas en un slider con bullets).
+
+## Estilos
+
+Tailwind CSS 4 con utilidades en los componentes. `src/app/globals.css` solo define el tema (colores, fuente, animaciones) y unas pocas reglas base; las clases compartidas (botones, contenedor, diálogos) están en `src/components/ui.ts`.
 
 ## Privacidad y alcance
 
