@@ -6,14 +6,14 @@ Sitio en Next.js App Router, TypeScript, Tailwind CSS 4 y pnpm. Usa la identidad
 
 ```sh
 pnpm install
-pnpm dev --port 3010
+pnpm dev
 ```
 
 ```sh
 pnpm typecheck
 pnpm test
 pnpm build
-pnpm start --port 3010
+pnpm start
 ```
 
 ## Contenido
@@ -44,4 +44,4 @@ Tailwind CSS 4 con utilidades en los componentes. `src/app/globals.css` solo def
 
 Solo las selecciones del carrito se guardan en localStorage. Los datos personales del formulario permanecen en memoria y se incorporan al enlace de WhatsApp cuando el cliente decide continuar. No hay servidor de pedidos, cobro electrónico, analítica ni cuentas de usuario.
 
-Proyecto Next.js estándar, preparado para un alojamiento compatible con Node/Next.js. Configurar `NEXT_PUBLIC_SITE_URL` con el dominio real antes de publicar para generar enlaces sociales correctos. No se ha publicado un dominio ni se ha enviado ningún pedido real.
+Proyecto Next.js estándar, preparado para un alojamiento compatible con Node/Next.js. `metadataBase`, `openGraph` y `twitter` están comentados en `layout.tsx` porque necesitan una URL absoluta real para que las vistas previas de WhatsApp/redes carguen la imagen. Cuando haya un dominio, descomentarlos y definir `NEXT_PUBLIC_SITE_URL` con ese dominio. No se ha publicado un dominio ni se ha enviado ningún pedido real.
