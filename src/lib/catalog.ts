@@ -1,9 +1,15 @@
 export type Product = {id:string;name:string;description:string;price:number;ingredients:string[];sauces:string[];tone:'yellow'|'green'};
+export type PaymentMethod={name:string;detail:string;holder:string;account?:string;key:string;qr:string};
 export const business = {
   name:'Los Compas',whatsapp:process.env.NEXT_PUBLIC_WHATSAPP??'573113146359',
   openingDate:process.env.NEXT_PUBLIC_OPENING_DATE??'2026-10-02T00:00:00-05:00',
   address:'María Auxiliadora',landmark:'A 5 minutos del CC Mayorca',
-  deliveryFee:null as number|null,bankName:'',bankAccount:'',bankHolder:'',paymentQr:'',
+  deliveryFee:null as number|null,
+  paymentMethods:[
+    {name:'Bancolombia',detail:'Ahorros',holder:'Sergio Garcia',account:'61500000968',key:'@sergio9335',qr:'/pago/bancolombia.png'},
+    // Nu oculto por ahora; los assets ya están listos en public/pago/nu.png para reactivarlo.
+    // {name:'Nu',detail:'',holder:'Sergio Garcia',key:'@SGB909',qr:'/pago/nu.png'},
+  ] as PaymentMethod[],
 };
 const ingredients=['Pan de ajonjolí de 20 cm','Salchicha','Ensalada de la casa','Cebolla','Ripio de papas','Salsas'];
 export const products:Product[]=[
@@ -23,11 +29,13 @@ export function restoreCart(raw:unknown):CartLine[]{
 }
 export const subtotal=(lines:CartLine[])=>lines.reduce((n,l)=>n+(productById(l.productId)?.price??0)*l.quantity,0);
 export type Customer={name:string;phone:string;address:string;reference:string;notes:string;payment:string};
-export function orderMessage(lines:CartLine[],c:Customer){const sub=subtotal(lines);return [
- 'Hola, me gustaría pedir en Los Compas:','',
- ...lines.map(l=>{const p=productById(l.productId)!;return `${l.quantity} x ${p.name} — ${money(p.price*l.quantity)}\nSalsas: ${p.sauces.length?(l.sauces.join(', ')||'Sin salsas'):'a confirmar con los compas'}`;}),'',
- `Subtotal: ${money(sub)}`,`Domicilio: ${business.deliveryFee===null?'por confirmar según dirección':money(business.deliveryFee)}`,
- `Total: ${business.deliveryFee===null?'subtotal + domicilio por confirmar':money(sub+business.deliveryFee)}`,'',
- `Nombre: ${c.name.trim()}`,`Celular: ${c.phone.trim()}`,`Dirección: ${c.address.trim()}`,c.reference.trim()?`Referencia: ${c.reference.trim()}`:'',`Pago: ${c.payment}`,c.notes.trim()?`Notas: ${c.notes.trim()}`:'','',
- 'Quedo pendiente de confirmar disponibilidad, total y tiempo de entrega.',
- ].join('\n');}
+// *negrita* es formato nativo de WhatsApp. Bloques separados por línea en blanco para que
+// cada producto y cada dato se distinga de un vistazo; se omite lo que no aporta info real
+// (domicilio/total solo se muestran si ya hay una tarifa real, no un "por confirmar").
+export function orderMessage(lines:CartLine[],c:Customer){
+ const sub=subtotal(lines),fee=business.deliveryFee;
+ const items=lines.map(l=>{const p=productById(l.productId)!;return `*${l.quantity} x ${p.name}* — ${money(p.price*l.quantity)}\nSalsas: ${p.sauces.length?(l.sauces.join(', ')||'Sin salsas'):'a confirmar con los compas'}`;});
+ const totals=fee===null?`*Subtotal: ${money(sub)}*\nDomicilio: se confirma según tu dirección`:`Subtotal: ${money(sub)}\nDomicilio: ${money(fee)}\n*Total: ${money(sub+fee)}*`;
+ const customer=[`*Nombre:* ${c.name.trim()}`,`*Celular:* ${c.phone.trim()}`,`*Dirección:* ${c.address.trim()}`,c.reference.trim()&&`*Referencia:* ${c.reference.trim()}`,c.notes.trim()&&`*Notas:* ${c.notes.trim()}`].filter(Boolean).join('\n');
+ return ['¡Hola! Quiero pedir en *Los Compas*',...items,totals,customer].join('\n\n');
+}

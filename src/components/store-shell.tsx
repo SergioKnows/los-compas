@@ -48,7 +48,7 @@ export function Header() {
 const footerLink = 'mb-2 block text-[13px] leading-[1.8] text-muted';
 export function Footer() {
     return <>
-        <footer className="border-t border-line bg-soft pt-10 pb-[84px] max-md:pt-8 max-md:pb-[88px]">
+        <footer className="border-t border-line bg-soft pt-10 pb-4 max-md:pt-8 max-md:pb-4">
             <div className={`${wrap} flex items-start justify-between gap-x-10 max-md:flex-wrap max-md:gap-y-8`}>
                 <div><img className="mb-[18px] block w-[100px]" src="/brand/logo-compacto.svg" alt="Los Compas" width="120" height="75" /><p className="text-[13px] leading-[1.8] text-muted">El parche del buen perro.</p></div>
                 <div><Link className={footerLink} href="/#menu">Nuestro menú</Link><Link className={footerLink} href="/#domicilios">Domicilios</Link><Link className={footerLink} href="/pagar">Tu pedido y pagos</Link></div>

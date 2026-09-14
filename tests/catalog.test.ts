@@ -10,7 +10,8 @@ test('separa salsas, combina duplicados y limita cantidades',()=>{const lines=re
 test('mensaje incluye contactos, salsas, subtotales y domicilio sin inventarlo',()=>{
  const lines=restoreCart([{productId:'sencillo',quantity:2,sauces:[]},{productId:'plancha',quantity:1,sauces:['Ajo','Rosada']}]);
  const message=orderMessage(lines,{name:'Ana',phone:'3001234567',address:'Calle 10 #20-30',reference:'Torre 2',notes:'Sin cebolla & gracias',payment:'A convenir por WhatsApp'});
- assert.equal(subtotal(lines),40000);for(const text of ['2 x Sencillo','1 x Perro a la plancha','Sin salsas','Ajo, Rosada','Ana','3001234567','Torre 2','Sin cebolla & gracias','por confirmar según dirección'])assert.ok(message.includes(text),text);
+ assert.equal(subtotal(lines),40000);for(const text of ['2 x Sencillo','1 x Perro a la plancha','Sin salsas','Ajo, Rosada','Ana','3001234567','Torre 2','Sin cebolla & gracias','se confirma según tu dirección'])assert.ok(message.includes(text),text);
+ assert.ok(!message.includes('Pago:'),'no debe incluir el pago fijo, no aporta info');
  const url=new URL(whatsappUrl(message)!);assert.equal(url.hostname,'wa.me');assert.equal(url.pathname,'/573113146359');assert.equal(url.searchParams.get('text'),message);
 });
 test('rechaza números no configurados o malformados',()=>{assert.equal(whatsappUrl('Hola',''),null);assert.equal(whatsappUrl('Hola','abc'),null);assert.ok(whatsappUrl('Hola','+57 311 3146359'));assert.deepEqual(restoreCart(null),[]);});

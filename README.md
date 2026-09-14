@@ -28,7 +28,7 @@ pnpm start
 
 `src/lib/catalog.ts` contiene los dos productos, precios numéricos en COP, ingredientes, salsas y datos del negocio. `.env.example` documenta el teléfono, la fecha y el origen público. Las variables `NEXT_PUBLIC_*` se incluyen en la compilación: recompilar cuando cambien.
 
-El número provisional es 573113146359. El costo/cobertura del domicilio y los medios de pago se confirman por WhatsApp. No se reutilizaron cuentas, QR, políticas ni datos privados de maria-makeup. Los campos bancarios opcionales solo se muestran cuando se completan con datos de Los Compas.
+El número provisional es 573113146359. El costo/cobertura del domicilio se confirma por WhatsApp. La sección de pago en `/pagar` (QR, cuenta/llave por copiar) sale de `business.paymentMethods` en `catalog.ts` y solo se muestra si el arreglo no está vacío; agregar o quitar bancos ahí. Las imágenes de los QR viven en `public/pago/`. Usa las cuentas de Sergio (propietario) ya usadas en `maria-makeup`, reutilizadas a propósito por ser la misma persona.
 
 La fecha marca el día de apertura en Colombia; no se anuncia una hora de atención porque aún no está definida. Actualizar el texto previo a la apertura en `src/components/menu.tsx` cuando corresponda.
 
