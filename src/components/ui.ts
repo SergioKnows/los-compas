@@ -14,7 +14,9 @@ const variants={
 };
 export const button=(variant:keyof typeof variants,extra='')=>`${buttonBase} ${variants[variant]} ${extra}`.trim();
 export const overlay='fixed inset-0 z-[60] bg-[#19251e55] backdrop-blur-[3px] motion-safe:animate-fade';
-export const dialog='fixed left-1/2 top-1/2 z-[70] max-h-[calc(100dvh-40px)] w-[min(520px,calc(100%-32px))] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg bg-white p-8 shadow-[0_24px_80px_#0002] motion-safe:animate-fade max-md:p-[25px]';
+// Mismo ancho en todas las pantallas (no solo mobile) para que el modal se vea igual de compacto
+// en tablet/desktop en vez de estirarse; calc(100%-32px) sigue protegiendo los celulares angostos.
+export const dialog='fixed left-1/2 top-1/2 z-[70] max-h-[calc(100dvh-40px)] w-[min(440px,calc(100%-32px))] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg bg-white p-8 shadow-[0_24px_80px_#0002] motion-safe:animate-fade max-md:p-[25px]';
 // No reutiliza iconButton: su "relative" le gana en cascada a "absolute" y el botón deja de anclarse a la esquina.
 export const dialogClose='absolute right-3 top-3 z-10 inline-flex size-9 items-center justify-center rounded-full border border-line bg-white shadow-[0_2px_8px_#0002]';
 export const dialogTitle='mt-6 mb-[13px] max-w-[90%] text-[29px] font-bold leading-[1.1] max-md:text-[27px]';

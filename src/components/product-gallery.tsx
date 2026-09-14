@@ -8,7 +8,7 @@ const AUTOPLAY_MS=6000;
 // superpuestas, la activa entra a opacidad y escala normal y la saliente se desvanece con un leve
 // zoom, desplazamiento y giro. Autoplay cada AUTOPLAY_MS, pausa con el mouse encima y respeta reduced-motion.
 // Bullets y swipe para navegar; un clic/tap sin arrastrar llama a onOpen (abre el diálogo).
-export function ProductGallery({images,name,priority=false,onOpen}:{images:ProductImage[];name:string;priority?:boolean;onOpen?:()=>void}){
+export function ProductGallery({images,name,priority=false,onOpen,size='aspect-[4/3]'}:{images:ProductImage[];name:string;priority?:boolean;onOpen?:()=>void;size?:string}){
  const count=images.length,[active,setActive]=useState(0);
  const paused=useRef(false),lastInteraction=useRef(0),swipe=useRef<{x:number;moved:boolean}|null>(null),suppressClick=useRef(false);
  useEffect(()=>{
@@ -30,8 +30,8 @@ export function ProductGallery({images,name,priority=false,onOpen}:{images:Produ
  };
  const onClick=()=>{if(suppressClick.current){suppressClick.current=false;return;}onOpen?.();};
  const clickable=onOpen?'cursor-pointer':'';
- if(count===1)return <div className={`relative aspect-[4/3] overflow-hidden bg-soft ${clickable}`} onClick={onOpen}><Image src={images[0].src} alt={images[0].alt} fill sizes={sizes} priority={priority} draggable={false} className="object-cover"/></div>;
- return <div className="relative aspect-[4/3] overflow-hidden bg-soft" aria-roledescription="carrusel" aria-label={`Fotos de ${name}`}>
+ if(count===1)return <div className={`relative ${size} overflow-hidden bg-soft ${clickable}`} onClick={onOpen}><Image src={images[0].src} alt={images[0].alt} fill sizes={sizes} priority={priority} draggable={false} className="object-cover"/></div>;
+ return <div className={`relative ${size} overflow-hidden bg-soft`} aria-roledescription="carrusel" aria-label={`Fotos de ${name}`}>
   <div className={`absolute inset-0 touch-pan-y select-none ${clickable}`} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onClick={onClick}>
    {images.map((img,i)=><Image key={img.alt} src={img.src} alt={img.alt} fill sizes={sizes} priority={priority&&i===0} draggable={false} aria-hidden={i!==active} className={`object-cover motion-safe:transition-all motion-safe:duration-500 motion-safe:ease-in-out ${i===active?'z-10 translate-x-0 scale-100 rotate-0 opacity-100':'z-0 -translate-x-4 scale-110 -rotate-6 opacity-0'}`}/>)}
   </div>
