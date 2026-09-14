@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import {CartProvider} from '@/components/cart-provider';
 import {Header,Footer} from '@/components/store-shell';
@@ -11,5 +12,5 @@ export const metadata: Metadata = {
   twitter: {card:'summary_large_image',title:'Los Compas | El parche del buen perro',images:['/brand/social.png']},
 };
 export default function RootLayout({children}:{children:React.ReactNode}) {
-  return <html lang="es-CO"><body><CartProvider><Header/>{children}<Footer/></CartProvider></body></html>;
+  return <html lang="es-CO"><body><CartProvider><Header/>{children}<Footer/></CartProvider><Analytics/></body></html>;
 }
