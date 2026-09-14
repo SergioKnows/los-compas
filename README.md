@@ -42,6 +42,6 @@ Tailwind CSS 4 con utilidades en los componentes. `src/app/globals.css` solo def
 
 ## Privacidad y alcance
 
-Solo las selecciones del carrito se guardan en localStorage. Los datos personales del formulario permanecen en memoria y se incorporan al enlace de WhatsApp cuando el cliente decide continuar. No hay servidor de pedidos, cobro electrónico, analítica ni cuentas de usuario.
+Solo las selecciones del carrito se guardan en localStorage. Los datos personales del formulario permanecen en memoria y se incorporan al enlace de WhatsApp cuando el cliente decide continuar. No hay servidor de pedidos, cobro electrónico ni cuentas de usuario. Vercel Web Analytics mide visitas de forma agregada y sin cookies (`@vercel/analytics`).
 
 Desplegado en Vercel: https://los-compas.vercel.app. `NEXT_PUBLIC_SITE_URL` debe definirse en las variables de entorno de Vercel con ese mismo origen (o el dominio propio, si se agrega uno más adelante) para que las vistas previas de WhatsApp/redes carguen la imagen. No se ha enviado ningún pedido real.
