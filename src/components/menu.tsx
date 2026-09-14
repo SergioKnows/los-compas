@@ -14,9 +14,9 @@ function ProductCard({product,index}:{product:Product;index:number}){
  const {add,ready}=useCart(),[open,setOpen]=useState(false),[sauces,setSauces]=useState<string[]>(product.sauces);
  const choose=(s:string)=>setSauces(old=>old.includes(s)?old.filter(x=>x!==s):[...old,s]);
  const t=tone[product.tone];
- return <article className="flex flex-col overflow-hidden rounded-lg border border-line transition-[box-shadow,translate,scale] duration-300 ease-out motion-safe:hover:-translate-y-[3px] motion-safe:hover:scale-[1.015] hover:shadow-[0_12px_32px_#25252508]">
+ return <article className="flex flex-col overflow-hidden rounded-lg border border-line shadow-md shadow-gray-400 transition-[box-shadow,translate,scale] duration-300 ease-out motion-safe:hover:-translate-y-[3px] motion-safe:hover:scale-[1.015] hover:shadow-lg">
   <ProductGallery images={productImages[product.id]??[]} name={product.name} priority={index===0} onOpen={()=>setOpen(true)}/>
-  <div className={`flex h-[76px] items-center justify-between px-7 max-md:h-[66px] max-md:px-[22px] ${t.strip}`}><span className={productNumber}>0{index+1}</span><span className="flex items-center gap-2 text-[11px] font-bold uppercase">{index===0?<Utensils size={17}/>:<Flame size={17}/>} {index===0?'El tradicional':'El de la plancha'}</span></div>
+  <div className={`flex h-[52px] items-center justify-between px-7 max-md:h-[46px] max-md:px-[22px] ${t.strip}`}><span className={productNumber}>0{index+1}</span><span className="flex items-center gap-2 text-[11px] font-bold uppercase">{index===0?<Utensils size={17}/>:<Flame size={17}/>} {index===0?'El tradicional':'El de la plancha'}</span></div>
   <div className="flex-1 cursor-pointer px-7 pt-7 pb-[18px] max-md:px-[22px] max-md:pt-[23px] max-md:pb-[15px]" onClick={()=>setOpen(true)}>
    <h3 className="text-[29px] font-[750] leading-[1.1] max-md:text-[27px]">{product.name}</h3>
    <p className="mt-[13px] min-h-12 text-sm leading-[1.7] text-muted max-md:min-h-0">{product.description}</p>
@@ -28,13 +28,12 @@ function ProductCard({product,index}:{product:Product;index:number}){
   </div>
   <Dialog.Root open={open} onOpenChange={setOpen}>
    <Dialog.Portal><Dialog.Overlay className={overlay}/><Dialog.Content className={dialog}>
-    <div className="-mx-8 -mt-8 mb-6 overflow-hidden rounded-t-lg max-md:-mx-[25px] max-md:-mt-[25px]"><ProductGallery images={productImages[product.id]??[]} name={product.name}/></div>
+    <div className="relative -mx-8 -mt-8 mb-6 overflow-hidden rounded-t-lg max-md:-mx-[25px] max-md:-mt-[25px]"><ProductGallery images={productImages[product.id]??[]} name={product.name} size="aspect-video w-full"/><span className={`${productNumber} ${t.badge} absolute bottom-3 left-3 z-20`}>0{index+1}</span></div>
     <Dialog.Close aria-label="Cerrar detalles" className={dialogClose}><X size={20}/></Dialog.Close>
-    <span className={`${productNumber} ${t.badge}`}>0{index+1}</span>
     <Dialog.Title className={dialogTitle}>{product.name}</Dialog.Title>
     <Dialog.Description className={dialogText}>{product.description}</Dialog.Description>
     <h3 className="mt-6 mb-2.5 text-sm font-bold">Ingredientes</h3>
-    <ul className="list-disc pl-[18px] text-[13px] leading-[1.9] text-muted max-md:text-xs">{product.ingredients.map(i=><li key={i}>{emphasize(i)}</li>)}</ul>
+    <ul className="grid grid-cols-2 gap-x-4 list-disc pl-[18px] text-[13px] leading-[1.9] text-muted max-md:text-xs">{product.ingredients.map(i=><li key={i}>{emphasize(i)}</li>)}</ul>
     <h3 className="mt-6 mb-2.5 text-sm font-bold">Salsas</h3>
     {product.sauces.length?<fieldset className="grid grid-cols-2 gap-[9px]"><legend className="sr-only">Elige las salsas para tu perro</legend>{product.sauces.map(s=><label key={s} className="flex cursor-pointer items-center gap-[9px] rounded-[5px] border border-line p-3 text-xs has-checked:border-hoja has-checked:bg-hoja-100"><input type="checkbox" className="size-4 accent-hoja" checked={sauces.includes(s)} onChange={()=>choose(s)}/><span>{s}</span></label>)}</fieldset>:<p className={dialogText}>Pregunta por las salsas disponibles al confirmar tu pedido.</p>}
     <p className="mt-[22px] text-[11px] leading-[1.7] text-muted">¿Tienes alguna alergia? Consúltanos antes de pedir.</p>
@@ -44,6 +43,8 @@ function ProductCard({product,index}:{product:Product;index:number}){
  </article>;
 }
 export function Menu(){return <section id="menu" className={`${wrap} py-[72px] max-md:py-[42px]`}>
- <div className="mb-8"><div className={eyebrow}>El menú de los compas</div><h2 className="mt-3 text-[38px] font-[750] leading-[1.12] max-md:text-[30px]">Dos formas de<br className="hidden max-md:block"/> armar el parche.</h2></div>
- <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1">{products.map((p,i)=><ProductCard key={p.id} product={p} index={i}/>)}</div>
+ <div className="mx-auto max-w-[600px] lg:max-w-[800px] xl:max-w-[900px]">
+  <div className="mb-8"><div className={eyebrow}>El menú de los compas</div><h2 className="mt-3 text-[38px] font-[750] leading-[1.12] max-md:text-[30px]">Dos formas de<br className="hidden max-md:block"/> armar el parche.</h2></div>
+  <div className="grid grid-cols-2 gap-6 max-md:grid-cols-1 max-md:gap-10">{products.map((p,i)=><ProductCard key={p.id} product={p} index={i}/>)}</div>
+ </div>
 </section>;}
